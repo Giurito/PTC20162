@@ -30,23 +30,23 @@ rx1:
      do ::  to_rcvr?msg1
         if
         :: true -> printf("recebeu msg1\n")
+        to_sndr!ack1;
         :: true -> 
         printf("msg corrompida\n")   
         fi
         :: timeout -> goto rx1
      od
-     
-        to_sndr!ack1;
         
 rx2:  
      do ::  to_rcvr?msg0
         if
         :: true -> printf("recebeu msg0\n")
+        to_sndr!ack0;
         :: true -> 
         printf("msg corrompida\n")   
         fi
         :: timeout -> goto rx2
      od
      
-        to_sndr!ack0;
+
 }
