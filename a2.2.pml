@@ -2,7 +2,7 @@ chan canal = [4] of {int};
 
 active [2] proctype produtor()
 {
-  int msg
+  int msg;
   canal!1;
   canal!2;
   canal!3;
