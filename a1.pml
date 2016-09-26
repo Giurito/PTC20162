@@ -18,7 +18,7 @@ active proctype produtor()
 active proctype consumidor() {
  
   // aguarda uma mensagem pelo canal
-  canal1?msg
+  canal?msg
   printf("Recebeu %d\n", msg)
 
 }
