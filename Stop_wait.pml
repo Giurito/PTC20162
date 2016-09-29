@@ -13,8 +13,9 @@ tx1:
           :: true -> 
           printf("msg corrompida\n") 
         fi
-    od
         :: timeout -> goto tx1
+    od
+        
 tx2:   
     to_rcvr!msg0;
     do  :: to_sndr?ack0;
@@ -24,8 +25,9 @@ tx2:
           :: true -> 
           printf("msg corrompida\n") 
         fi
-    od
         :: timeout -> goto tx2
+    od
+        
 }
  
 active proctype Receiver()
