@@ -9,6 +9,7 @@ tx1:
     do  :: to_sndr?ack1;
         if
           :: true -> printf("recebeu ack1\n")
+          break
           :: true -> 
           printf("msg corrompida\n") 
         fi
@@ -18,6 +19,7 @@ tx2:
     do  :: to_sndr?ack0;
         if
           :: true -> printf("recebeu ack0\n")
+          break
           :: true -> 
           printf("msg corrompida\n") 
         fi
@@ -31,6 +33,7 @@ rx1:
         if
         :: true -> printf("recebeu msg1\n")
         to_sndr!ack1;
+        break
         :: true -> 
         printf("msg corrompida\n")   
         fi
@@ -42,6 +45,7 @@ rx2:
         if
         :: true -> printf("recebeu msg0\n")
         to_sndr!ack0;
+        break
         :: true -> 
         printf("msg corrompida\n")   
         fi
