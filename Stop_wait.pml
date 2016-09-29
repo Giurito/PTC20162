@@ -35,6 +35,7 @@ tx2:
           break
           :: true -> 
           printf("ack0 corrompida\n") 
+          run Receiver();
         fi
         :: timeout -> 
         printf("timeout tx2\n") 
