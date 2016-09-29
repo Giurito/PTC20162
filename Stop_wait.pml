@@ -5,6 +5,7 @@ chan    to_rcvr = [2] of { mtype };
 active proctype Sender()
 {
 do
+::
 tx1:    
     atomic{ 
     to_rcvr!msg1;
@@ -47,6 +48,7 @@ od
 active proctype Receiver()
 {
 do
+::
 rx1:   
      do 
      ::  to_rcvr?msg1
