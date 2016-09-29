@@ -4,8 +4,6 @@ chan    to_rcvr = [2] of { mtype };
  
 active proctype Sender()
 {
-do
-::
 tx1:    
     atomic{ 
     to_rcvr!msg1;
@@ -41,14 +39,11 @@ tx2:
         :: timeout -> 
         printf("timeout tx2\n") 
         goto tx2
-    od
-od       
+    od    
 }
  
 active proctype Receiver()
 {
-do
-::
 rx1:   
      do 
      ::  to_rcvr?msg1
@@ -82,7 +77,5 @@ rx2:
      :: timeout -> 
         printf("timeout rx2\n") 
         goto rx1
-     od
-od     
-
+     od    
 }
