@@ -6,6 +6,7 @@ active proctype Sender()
 {
 tx1:    
     to_rcvr!msg1;
+    printf("Enviei msg1\n")
     do  :: to_sndr?ack1;
         if
           :: true -> printf("recebeu ack1\n")
@@ -21,6 +22,7 @@ tx1:
         
 tx2:   
     to_rcvr!msg0;
+    printf("Enviei msg0\n")
     do  :: to_sndr?ack0;
         if
           :: true -> printf("recebeu ack0\n")
@@ -42,6 +44,7 @@ rx1:
         if
         :: true -> printf("recebeu msg1\n")
         to_sndr!ack1;
+        printf("Enviei ack1\n")
         break
         :: true -> 
         printf("msg corrompida\n")   
@@ -55,6 +58,7 @@ rx2:
         if
         :: true -> printf("recebeu msg0\n")
         to_sndr!ack0;
+        printf("Enviei ack0\n")
         break
         :: true -> 
         printf("msg corrompida\n")   
