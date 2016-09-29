@@ -13,6 +13,7 @@ tx1:
           :: true -> 
           printf("msg corrompida\n") 
         fi
+    od
         :: timeout -> goto tx1
 tx2:   
     to_rcvr!msg0;
@@ -23,6 +24,7 @@ tx2:
           :: true -> 
           printf("msg corrompida\n") 
         fi
+    od
         :: timeout -> goto tx2
 }
  
