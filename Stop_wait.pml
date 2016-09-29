@@ -4,12 +4,14 @@ chan    to_rcvr = [2] of { mtype };
  
 active proctype Sender()
 {
+do
 tx1:    
     atomic{ 
     to_rcvr!msg1;
     printf("Enviei msg1\n")
     }
-    do  :: to_sndr?ack1;
+    do  
+    :: to_sndr?ack1;
         if
           :: true -> printf("recebeu ack1\n")
           break
@@ -17,10 +19,11 @@ tx1:
           printf("ack1 corrompida\n") 
         fi
         
-        :: timeout ->
+    :: timeout ->
         printf("timeout tx1\n") 
         goto tx1
     od
+
         
 tx2:   
     atomic{
@@ -38,13 +41,15 @@ tx2:
         printf("timeout tx2\n") 
         goto tx2
     od
-        
+ od       
 }
  
 active proctype Receiver()
 {
+do
 rx1:   
-     do ::  to_rcvr?msg1
+     do 
+     ::  to_rcvr?msg1
         if
         :: true -> printf("recebeu msg1\n")
         atomic{
@@ -55,12 +60,13 @@ rx1:
         :: true -> 
         printf("msg1 corrompida\n")   
         fi
-        :: timeout -> 
+     :: timeout -> 
         printf("timeout rx1\n") 
         goto rx2
      od
 rx2:        
-     do ::  to_rcvr?msg0
+     do 
+     ::  to_rcvr?msg0
         if
         :: true -> printf("recebeu msg0\n")
         atomic{
@@ -71,10 +77,10 @@ rx2:
         :: true -> 
         printf("msg0 corrompida\n")   
         fi
-        :: timeout -> 
+     :: timeout -> 
         printf("timeout rx2\n") 
         goto rx1
      od
-     
+od     
 
 }
