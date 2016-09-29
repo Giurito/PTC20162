@@ -37,7 +37,7 @@ tx2:
  
 active proctype Receiver()
 {
-rx:   
+rx1:   
      do ::  to_rcvr?msg1
         if
         :: true -> printf("recebeu msg1\n")
@@ -48,9 +48,9 @@ rx:
         fi
         :: timeout -> 
         printf("timeout rx1\n") 
-        goto rx
+        goto rx2
      od
-        
+rx2:        
      do ::  to_rcvr?msg0
         if
         :: true -> printf("recebeu msg0\n")
@@ -61,7 +61,7 @@ rx:
         fi
         :: timeout -> 
         printf("timeout rx2\n") 
-        goto rx
+        goto rx1
      od
      
 
