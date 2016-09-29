@@ -12,7 +12,7 @@ tx1:
           :: true -> printf("recebeu ack1\n")
           break
           :: true -> 
-          printf("msg corrompida\n") 
+          printf("ack1 corrompida\n") 
         fi
         
         :: timeout ->
@@ -28,7 +28,7 @@ tx2:
           :: true -> printf("recebeu ack0\n")
           break
           :: true -> 
-          printf("msg corrompida\n") 
+          printf("ack0 corrompida\n") 
         fi
         :: timeout -> 
         printf("timeout tx2\n") 
@@ -47,7 +47,7 @@ rx1:
         printf("Enviei ack1\n")
         break
         :: true -> 
-        printf("msg corrompida\n")   
+        printf("msg1 corrompida\n")   
         fi
         :: timeout -> 
         printf("timeout rx1\n") 
@@ -61,7 +61,7 @@ rx2:
         printf("Enviei ack0\n")
         break
         :: true -> 
-        printf("msg corrompida\n")   
+        printf("msg0 corrompida\n")   
         fi
         :: timeout -> 
         printf("timeout rx2\n") 
