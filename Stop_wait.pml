@@ -13,7 +13,9 @@ tx1:
           :: true -> 
           printf("msg corrompida\n") 
         fi
-        :: timeout -> goto tx1
+        :: timeout ->
+        printf("timeout tx1\n") 
+        goto tx1
     od
         
 tx2:   
@@ -25,7 +27,9 @@ tx2:
           :: true -> 
           printf("msg corrompida\n") 
         fi
-        :: timeout -> goto tx2
+        :: timeout -> 
+        printf("timeout tx2\n") 
+        goto tx2
     od
         
 }
@@ -41,7 +45,9 @@ rx1:
         :: true -> 
         printf("msg corrompida\n")   
         fi
-        :: timeout -> goto rx1
+        :: timeout -> 
+        printf("timeout rx1\n") 
+        goto rx1
      od
         
 rx2:  
@@ -53,7 +59,9 @@ rx2:
         :: true -> 
         printf("msg corrompida\n")   
         fi
-        :: timeout -> goto rx2
+        :: timeout -> 
+        printf("timeout rx2\n") 
+        goto rx2
      od
      
 
