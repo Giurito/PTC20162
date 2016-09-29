@@ -13,6 +13,7 @@ tx1:
           :: true -> 
           printf("msg corrompida\n") 
         fi
+        
         :: timeout ->
         printf("timeout tx1\n") 
         goto tx1
@@ -36,7 +37,7 @@ tx2:
  
 active proctype Receiver()
 {
-rx1:   
+rx:   
      do ::  to_rcvr?msg1
         if
         :: true -> printf("recebeu msg1\n")
@@ -47,10 +48,9 @@ rx1:
         fi
         :: timeout -> 
         printf("timeout rx1\n") 
-        goto rx1
+        goto rx
      od
         
-rx2:  
      do ::  to_rcvr?msg0
         if
         :: true -> printf("recebeu msg0\n")
@@ -61,7 +61,7 @@ rx2:
         fi
         :: timeout -> 
         printf("timeout rx2\n") 
-        goto rx2
+        goto rx
      od
      
 
