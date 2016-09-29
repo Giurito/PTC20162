@@ -41,7 +41,7 @@ tx2:
         printf("timeout tx2\n") 
         goto tx2
     od
- od       
+od       
 }
  
 active proctype Receiver()
