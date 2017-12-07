@@ -1,0 +1,80 @@
+library(caret)
+library(r2pmml)
+
+filename <- "NOMEDOARQUIVO.txt"
+dataset <- read.csv(filename, header=FALSE)
+colnames(dataset) <- c("RSSIGA","RSSIGB","RSSIGC","Local")
+
+# Separação do dataset de treinamento(80%) do de teste(20%) 
+validation_index <- createDataPartition(dataset$Local, p=0.80, list=FALSE)
+validation <- dataset[-validation_index,]
+dataset <- dataset[validation_index,]
+
+
+
+
+# Listar Classes existentes
+levels(dataset$Local)
+
+
+
+# Ocorrência de cada classe
+percentage <- prop.table(table(dataset$Local)) * 100
+cbind(freq=table(dataset$Local), percentage=percentage)
+
+
+# Estatísticas sobre o dataset
+summary(dataset)
+
+# Separar o dataset em entradas e saidas(classes)
+x <- dataset[,1:3]
+y <- dataset[,4]
+
+# Diagrama de Caixa
+featurePlot(x=x, y=y, plot="box")
+
+
+# Diagrama de Dispersão
+featurePlot(x=x, y=y, plot="ellipse",auto.key = list(columns = 3))
+
+
+# Rodar Validação cruzada em 10 divisões
+control <- trainControl(method="cv", number=10)
+metric <- "Accuracy"
+
+
+
+# LDA
+set.seed(7)
+fit.lda <- train(Local~., data=dataset, method="lda", metric=metric, trControl=control)
+# b) nonlinear algorithms
+# CART
+set.seed(7)
+fit.cart <- train(Local~., data=dataset, method="rpart", metric=metric, trControl=control)
+# kNN
+set.seed(7)
+fit.knn <- train(Local~., data=dataset, method="knn", metric=metric, trControl=control)
+# SVM
+set.seed(7)
+fit.svm <- train(Local~., data=dataset, method="svmRadial", metric=metric, trControl=control)
+# Random Forest
+set.seed(7)
+fit.rf <- train(Local~., data=dataset, method="rf", metric=metric, trControl=control)
+
+
+
+#summarize accuracy of models
+results <- resamples(list(lda=fit.lda, cart=fit.cart, knn=fit.knn, rf=fit.rf, svm=fit.svm))
+summary(results)
+
+
+
+# Estimar a precisão utilizando o dataset de teste
+predictions <- predict(fit.lda, validation)
+confusionMatrix(predictions, validation$Local)
+
+
+
+
+
+
