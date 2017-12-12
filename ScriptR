@@ -63,17 +63,25 @@ fit.rf <- train(Local~., data=dataset, method="rf", metric=metric, trControl=con
 
 
 
-#summarize accuracy of models
-results <- resamples(list(lda=fit.lda, cart=fit.cart, knn=fit.knn, rf=fit.rf, svm=fit.svm))
-summary(results)
-
-
-
-# Estimar a precisão utilizando o dataset de teste
+# Estimar a precisão utilizando o dataset de teste com LDA
 predictions <- predict(fit.lda, validation)
 confusionMatrix(predictions, validation$Local)
 
+# Estimar a precisão utilizando o dataset de teste com CART
+predictions <- predict(fit.cart, validation)
+confusionMatrix(predictions, validation$Local)
 
+# Estimar a precisão utilizando o dataset de teste com KNN
+predictions <- predict(fit.knn, validation)
+confusionMatrix(predictions, validation$Local)
+
+# Estimar a precisão utilizando o dataset de teste com SVM
+predictions <- predict(fit.svm, validation)
+confusionMatrix(predictions, validation$Local)
+
+# Estimar a precisão utilizando o dataset de teste com Random Forest
+predictions <- predict(fit.rf, validation)
+confusionMatrix(predictions, validation$Local)
 
 
 
