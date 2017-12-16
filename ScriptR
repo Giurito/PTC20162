@@ -41,7 +41,6 @@ featurePlot(x=x, y=y, plot="ellipse",auto.key = list(columns = 3))
 # LDA
 set.seed(7)
 fit.lda <- train(Local~., data=dataset, method="lda", metric=metric, trControl=control)
-# b) nonlinear algorithms
 # CART
 set.seed(7)
 fit.cart <- train(Local~., data=dataset, method="rpart", metric=metric, trControl=control)
